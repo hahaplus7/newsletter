@@ -45,8 +45,24 @@
       .month-bar {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         margin-bottom: 18px;
+      }
+
+      .month-nav {
+        width: 26px;
+        height: 26px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: rgba(255,255,255,0.2);
+        color: #4e535b;
+        font-size: 20px;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
       }
 
       .month-select {
@@ -62,16 +78,9 @@
         color: #1d2128;
       }
 
-      .month-select .caret {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 18px;
-        height: 18px;
-        border-radius: 6px;
-        font-size: 18px;
-        line-height: 1;
-        color: #51575f;
+      .month-label {
+        font-size: 16px;
+        font-weight: 700;
       }
 
       .filter-row {
@@ -290,10 +299,11 @@
   <body>
     <div class="page">
       <div class="month-bar">
+        <button class="month-nav" id="prevMonth" type="button" aria-label="이전 달">‹</button>
         <div class="month-select" aria-label="보고서 캘린더">
-          <span>Event Wrap-Up Report Calendar</span>
-          <span class="caret">›</span>
+          <span class="month-label" id="monthLabel">2026년 9월</span>
         </div>
+        <button class="month-nav" id="nextMonth" type="button" aria-label="다음 달">›</button>
       </div>
 
       <div class="filter-row" aria-label="카테고리 필터">
@@ -309,13 +319,13 @@
           <div class="publication-label">Newsletter</div>
           <h3>2026 Sep / 2nd Thursday</h3>
           <p>Fixed publication date: 2026-09-10</p>
-          <a class="publication-link" href="wrapup-report-2026-09-10.html">Open wrap-up report</a>
+          <a class="publication-link" href="SMEC_KR_CxO_Letter_Sep2026_FINAL.html">Open wrap-up report</a>
         </div>
         <div class="publication-card">
           <div class="publication-label">Newsletter</div>
           <h3>2026 Oct / 2nd Thursday</h3>
           <p>Fixed publication date: 2026-10-08</p>
-          <a class="publication-link" href="wrapup-report-2026-10-08.html">Open wrap-up report</a>
+          <a class="publication-link" href="SMEC_KR_CxO_Letter_Oct2026_FINAL.html">Open wrap-up report</a>
         </div>
       </div>
 
@@ -333,7 +343,6 @@
       const month = {
         year: 2026,
         monthIndex: 8,
-        label: '2026년 9월'
       };
 
       const events = {
@@ -342,54 +351,48 @@
             title: 'Newsletter Wrap-up Report',
             meta: 'Newsletter',
             color: 'newsletter',
-            link: 'wrapup-report-2026-09-10.html'
+            link: 'SMEC_KR_CxO_Letter_Sep2026_FINAL.html'
           }
         ],
-        '2026-09-11': [
-          { title: 'AI Agent 개발', meta: 'Digital(한국어)', color: 'orange' }
-        ],
-        '2026-09-12': [
-          { title: 'Azure OpenAI 도입 사례', meta: 'Cloud & AI', color: 'blue' }
-        ],
-        '2026-09-13': [
-          { title: 'Agentic DevOps 핵심', meta: 'GitHub Copilot', color: 'red' },
-          { title: '빌드 자동화 워크플로', meta: 'Developer Experience', color: 'green' }
-        ],
-        '2026-09-14': [
-          { title: 'AI 논문/리서치 정리', meta: 'Digital(한국어)', color: 'purple' }
-        ],
         '2026-09-15': [
-          { title: 'Microsoft AI 보안 브리핑', meta: 'Security', color: 'red' }
+          {
+            title: 'Copilot & Agent Day Hands-on Workshop',
+            meta: 'Copilot',
+            color: 'red',
+            link: encodeURI('[Wrap-up]0915_Copilot_Agent_Day_Hands-on_Workshop_with_SoftwareOne_0915.html')
+          }
+        ],
+        '2026-09-30': [
+          {
+            title: 'SME&C Leadership Connection at Microsoft Industry Summit',
+            meta: 'Cloud & AI',
+            color: 'blue',
+            link: encodeURI('[Wrap-up_KR] SME&C Leadership Connection at Microsoft Industry Summit (9_30, COEX)_FINAL.html')
+          }
         ],
         '2026-10-08': [
           {
             title: 'Newsletter Wrap-up Report',
             meta: 'Newsletter',
             color: 'newsletter',
-            link: 'wrapup-report-2026-10-08.html'
+            link: 'SMEC_KR_CxO_Letter_Oct2026_FINAL.html'
           }
         ],
-        '2026-10-09': [
-          { title: 'Cloud modernization', meta: 'Cloud & AI', color: 'green' }
-        ],
-        '2026-10-10': [
-          { title: '보안 전략 세미나', meta: 'Security', color: 'red' }
-        ],
-        '2026-10-11': [
-          { title: 'M365 Copilot 성장 전략', meta: 'Copilot', color: 'blue' }
-        ],
-        '2026-10-12': [
-          { title: '실무 적용 사례 공유', meta: 'Digital(한국어)', color: 'orange' }
-        ],
-        '2026-10-13': [
-          { title: 'Azure 및 보안 전략 회의', meta: 'Cloud & AI', color: 'green' }
-        ],
-        '2026-10-14': [
-          { title: 'AI 활용 교육 프로그램', meta: 'Security', color: 'red' }
+        '2026-10-21': [
+          {
+            title: 'Microsoft Copilot & Agent Day with 씨앤토트',
+            meta: 'Copilot',
+            color: 'red',
+            link: encodeURI('[Wrap-up]10월21일_Copilot_Agent_Day_with_씨앤토트_KR.html')
+          }
         ]
       };
 
       const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+      function updateMonthLabel() {
+        document.getElementById('monthLabel').textContent = `${month.year}년 ${month.monthIndex + 1}월`;
+      }
 
       function renderCalendar() {
         const calendar = document.getElementById('calendar');
@@ -439,7 +442,7 @@
             const link = document.createElement('a');
             link.href = event.link || '#';
             link.className = 'link';
-            link.textContent = event.link ? 'wrap-up report' : '등록하기';
+            link.textContent = 'view report';
 
             eventBox.appendChild(title);
             eventBox.appendChild(meta);
@@ -451,6 +454,25 @@
         }
       }
 
+      document.getElementById('prevMonth').addEventListener('click', () => {
+        month.monthIndex = (month.monthIndex - 1 + 12) % 12;
+        if (month.monthIndex === 11) {
+          month.year -= 1;
+        }
+        updateMonthLabel();
+        renderCalendar();
+      });
+
+      document.getElementById('nextMonth').addEventListener('click', () => {
+        month.monthIndex = (month.monthIndex + 1) % 12;
+        if (month.monthIndex === 0) {
+          month.year += 1;
+        }
+        updateMonthLabel();
+        renderCalendar();
+      });
+
+      updateMonthLabel();
       renderCalendar();
     </script>
   </body>
