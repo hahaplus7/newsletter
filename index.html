@@ -3,35 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SMEC KR CxO Letter Calendar</title>
+    <title>SMEC KR CxO Letter calendar</title>
     <style>
       :root {
-        --bg: #f3f6fb;
+        --bg: #f5f7fb;
         --panel: #ffffff;
-        --panel-alt: #f8faff;
-        --text: #1a1f2e;
+        --line: #e7edf8;
+        --text: #1d2433;
         --muted: #667085;
-        --line: #e5ebf5;
         --primary: #0b57d0;
-        --primary-strong: #083d9b;
-        --primary-soft: #eaf2ff;
-        --release: #ffb703;
-        --release-soft: #fff4d6;
-        --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        --primary-dark: #0a419f;
+        --primary-soft: #edf4ff;
+        --release: #ffcc4d;
+        --release-soft: #fff3cd;
+        --release-text: #765600;
       }
 
       * { box-sizing: border-box; }
 
       body {
         margin: 0;
-        min-height: 100vh;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: linear-gradient(180deg, #edf3ff 0%, var(--bg) 100%);
+        background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
         color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+        min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 48px 20px;
+        padding: 40px 18px;
       }
 
       .page {
@@ -45,60 +44,58 @@
 
       .eyebrow {
         margin: 0 0 10px;
-        color: var(--primary);
         font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
+        color: var(--primary);
+        font-weight: 700;
       }
 
       h1 {
         margin: 0;
-        font-size: clamp(32px, 4vw, 52px);
-        letter-spacing: -0.04em;
+        font-size: clamp(30px, 4vw, 52px);
+        letter-spacing: -0.05em;
       }
 
       .subtitle {
         margin: 12px auto 0;
-        max-width: 680px;
+        max-width: 760px;
         color: var(--muted);
-        font-size: 17px;
         line-height: 1.6;
+        font-size: 17px;
       }
 
       .calendar-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(300px, 1fr));
         gap: 28px;
-        margin-top: 30px;
       }
 
       .month-card {
         background: var(--panel);
         border: 1px solid var(--line);
         border-radius: 22px;
-        box-shadow: var(--shadow);
-        padding: 26px 24px 20px;
+        box-shadow: 0 16px 38px rgba(15, 23, 42, 0.08);
+        padding: 22px 18px 18px;
       }
 
       .month-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
       }
 
       .month-name {
-        font-size: 26px;
+        font-size: 28px;
         font-weight: 800;
       }
 
       .year-tag {
-        display: inline-block;
-        padding: 8px 12px;
-        border-radius: 999px;
         background: var(--primary-soft);
         color: var(--primary);
+        border-radius: 999px;
+        padding: 7px 12px;
         font-size: 12px;
         font-weight: 700;
       }
@@ -107,7 +104,7 @@
       .days {
         display: grid;
         grid-template-columns: repeat(7, minmax(0, 1fr));
-        gap: 7px;
+        gap: 8px;
       }
 
       .weekdays {
@@ -118,14 +115,14 @@
         text-align: center;
         font-size: 11px;
         font-weight: 700;
-        color: var(--muted);
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
-        padding-bottom: 4px;
+        color: var(--muted);
+        padding: 4px 0;
       }
 
       .day {
-        height: 46px;
+        height: 44px;
         border-radius: 12px;
         display: flex;
         align-items: center;
@@ -137,30 +134,28 @@
       }
 
       .day.empty {
-        background: transparent;
-        border-color: transparent;
-        color: transparent;
+        visibility: hidden;
       }
 
       .day.release {
         background: var(--release-soft);
-        border-color: #f9d77d;
-        color: #7a5200;
+        border-color: #f5d468;
         font-weight: 800;
-        box-shadow: inset 0 0 0 1px rgba(255, 183, 3, 0.2);
+        color: var(--release-text);
+        box-shadow: inset 0 0 0 1px rgba(255, 204, 77, 0.2);
       }
 
       .day.release a {
-        color: inherit;
-        text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 100%;
+        color: inherit;
+        text-decoration: none;
       }
 
-      .release-button {
+      .issue-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -168,30 +163,20 @@
         margin-top: 18px;
         padding: 14px 16px;
         border-radius: 12px;
-        background: linear-gradient(180deg, var(--primary) 0%, var(--primary-strong) 100%);
+        background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
         color: #fff;
         text-decoration: none;
         font-weight: 700;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 10px 24px rgba(11, 87, 208, 0.22);
+        box-shadow: 0 12px 18px rgba(11, 87, 208, 0.2);
       }
 
-      .release-button:hover {
-        transform: translateY(-1px);
-      }
-
-      .release-label {
-        font-size: 13px;
-        opacity: 0.9;
+      .issue-link:hover {
+        filter: brightness(1.02);
       }
 
       @media (max-width: 760px) {
         .calendar-grid {
           grid-template-columns: 1fr;
-        }
-
-        .month-card {
-          padding: 20px 16px 18px;
         }
       }
     </style>
@@ -202,129 +187,118 @@
         <p class="eyebrow">SMEC KR CxO Letter</p>
         <h1>Newsletter Release Calendar</h1>
         <p class="subtitle">
-          공개 페이지에서 월별 뉴스레터를 바로 확인할 수 있도록, 각 월의 발행일을 클릭하면 해당 뉴스레터를 열 수 있습니다.
+          매달 둘째주 목요일에 발행되는 뉴스레터는 달력 날짜를 클릭하면 바로 열립니다.
         </p>
       </header>
 
-      <div class="calendar-grid">
-        <section class="month-card" aria-label="September 2026 calendar">
-          <div class="month-header">
-            <div class="month-name">September</div>
-            <span class="year-tag">2026</span>
-          </div>
-
-          <div class="weekdays">
-            <div class="weekday">Sun</div>
-            <div class="weekday">Mon</div>
-            <div class="weekday">Tue</div>
-            <div class="weekday">Wed</div>
-            <div class="weekday">Thu</div>
-            <div class="weekday">Fri</div>
-            <div class="weekday">Sat</div>
-          </div>
-
-          <div class="days">
-            <div class="day empty"> </div>
-            <div class="day empty"> </div>
-            <div class="day">1</div>
-            <div class="day">2</div>
-            <div class="day">3</div>
-            <div class="day">4</div>
-            <div class="day">5</div>
-            <div class="day">6</div>
-            <div class="day">7</div>
-            <div class="day">8</div>
-            <div class="day">9</div>
-            <div class="day release"><a href="./SMEC_KR_CxO_Letter_Sep2026_FINAL.html" target="_blank" rel="noopener noreferrer">10</a></div>
-            <div class="day">11</div>
-            <div class="day">12</div>
-            <div class="day">13</div>
-            <div class="day">14</div>
-            <div class="day">15</div>
-            <div class="day">16</div>
-            <div class="day">17</div>
-            <div class="day">18</div>
-            <div class="day">19</div>
-            <div class="day">20</div>
-            <div class="day">21</div>
-            <div class="day">22</div>
-            <div class="day">23</div>
-            <div class="day">24</div>
-            <div class="day">25</div>
-            <div class="day">26</div>
-            <div class="day">27</div>
-            <div class="day">28</div>
-            <div class="day">29</div>
-            <div class="day">30</div>
-            <div class="day empty"> </div>
-            <div class="day empty"> </div>
-            <div class="day empty"> </div>
-            <div class="day empty"> </div>
-          </div>
-
-          <a class="release-button" href="./SMEC_KR_CxO_Letter_Sep2026_FINAL.html" target="_blank" rel="noopener noreferrer">
-            September issue • <span class="release-label">2026.09.10 release</span>
-          </a>
-        </section>
-
-        <section class="month-card" aria-label="October 2026 calendar">
-          <div class="month-header">
-            <div class="month-name">October</div>
-            <span class="year-tag">2026</span>
-          </div>
-
-          <div class="weekdays">
-            <div class="weekday">Sun</div>
-            <div class="weekday">Mon</div>
-            <div class="weekday">Tue</div>
-            <div class="weekday">Wed</div>
-            <div class="weekday">Thu</div>
-            <div class="weekday">Fri</div>
-            <div class="weekday">Sat</div>
-          </div>
-
-          <div class="days">
-            <div class="day empty"> </div>
-            <div class="day empty"> </div>
-            <div class="day empty"> </div>
-            <div class="day">1</div>
-            <div class="day">2</div>
-            <div class="day">3</div>
-            <div class="day">4</div>
-            <div class="day">5</div>
-            <div class="day">6</div>
-            <div class="day">7</div>
-            <div class="day release"><a href="./SMEC_KR_CxO_Letter_Oct2026_FINAL.html" target="_blank" rel="noopener noreferrer">8</a></div>
-            <div class="day">9</div>
-            <div class="day">10</div>
-            <div class="day">11</div>
-            <div class="day">12</div>
-            <div class="day">13</div>
-            <div class="day">14</div>
-            <div class="day">15</div>
-            <div class="day">16</div>
-            <div class="day">17</div>
-            <div class="day">18</div>
-            <div class="day">19</div>
-            <div class="day">20</div>
-            <div class="day">21</div>
-            <div class="day">22</div>
-            <div class="day">23</div>
-            <div class="day">24</div>
-            <div class="day">25</div>
-            <div class="day">26</div>
-            <div class="day">27</div>
-            <div class="day">28</div>
-            <div class="day">29</div>
-            <div class="day">30</div>
-            <div class="day">31</div>
-          </div>
-
-          <a class="release-button" href="./SMEC_KR_CxO_Letter_Oct2026_FINAL.html" target="_blank" rel="noopener noreferrer">
-            October issue • <span class="release-label">2026.10.08 release</span>
-          </a>
-        </section>
-      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
     </div>
+
+    <script>
+      const issues = [
+        {
+          year: 2026,
+          month: 8,
+          label: 'September',
+          href: './SMEC_KR_CxO_Letter_Sep2026_FINAL.html',
+          releaseText: 'September issue • 2026.09.10'
+        },
+        {
+          year: 2026,
+          month: 9,
+          label: 'October',
+          href: './SMEC_KR_CxO_Letter_Oct2026_FINAL.html',
+          releaseText: 'October issue • 2026.10.08'
+        }
+      ];
+
+      function getSecondThursday(year, monthIndex) {
+        const first = new Date(year, monthIndex, 1);
+        const firstDay = first.getDay();
+        const offset = (4 - firstDay + 7) % 7;
+        const secondThursday = new Date(year, monthIndex, 1 + offset + 7);
+        return secondThursday.getDate();
+      }
+
+      function renderCalendar(monthConfig) {
+        const monthCard = document.createElement('section');
+        monthCard.className = 'month-card';
+
+        const monthHeader = document.createElement('div');
+        monthHeader.className = 'month-header';
+
+        const monthName = document.createElement('div');
+        monthName.className = 'month-name';
+        monthName.textContent = monthConfig.label;
+
+        const yearTag = document.createElement('span');
+        yearTag.className = 'year-tag';
+        yearTag.textContent = monthConfig.year;
+
+        monthHeader.appendChild(monthName);
+        monthHeader.appendChild(yearTag);
+
+        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const weekdayRow = document.createElement('div');
+        weekdayRow.className = 'weekdays';
+        weekdays.forEach((day) => {
+          const el = document.createElement('div');
+          el.className = 'weekday';
+          el.textContent = day;
+          weekdayRow.appendChild(el);
+        });
+
+        const daysWrap = document.createElement('div');
+        daysWrap.className = 'days';
+
+        const totalDays = new Date(monthConfig.year, monthConfig.month + 1, 0).getDate();
+        const firstDay = new Date(monthConfig.year, monthConfig.month, 1).getDay();
+        const releaseDay = getSecondThursday(monthConfig.year, monthConfig.month);
+
+        for (let i = 0; i < firstDay; i += 1) {
+          const empty = document.createElement('div');
+          empty.className = 'day empty';
+          empty.textContent = ' ';
+          daysWrap.appendChild(empty);
+        }
+
+        for (let day = 1; day <= totalDays; day += 1) {
+          const cell = document.createElement('div');
+          cell.className = 'day';
+
+          if (day === releaseDay) {
+            cell.classList.add('release');
+            const link = document.createElement('a');
+            link.href = monthConfig.href;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = day;
+            cell.appendChild(link);
+          } else {
+            cell.textContent = day;
+          }
+
+          daysWrap.appendChild(cell);
+        }
+
+        const issueLink = document.createElement('a');
+        issueLink.className = 'issue-link';
+        issueLink.href = monthConfig.href;
+        issueLink.target = '_blank';
+        issueLink.rel = 'noopener noreferrer';
+        issueLink.textContent = monthConfig.releaseText;
+
+        monthCard.appendChild(monthHeader);
+        monthCard.appendChild(weekdayRow);
+        monthCard.appendChild(daysWrap);
+        monthCard.appendChild(issueLink);
+        return monthCard;
+      }
+
+      const grid = document.getElementById('calendarGrid');
+      issues.forEach((issue) => {
+        grid.appendChild(renderCalendar(issue));
+      });
+    </script>
   </body>
 </html>
