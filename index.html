@@ -3,155 +3,175 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Microsoft 전략본부 뉴스레터 | Calendar</title>
+    <title>Microsoft 전략본부 뉴스레터</title>
     <style>
       :root {
-        --bg-1: #f5f7fb;
-        --bg-2: #edf3ff;
-        --panel: rgba(255, 255, 255, 0.92);
+        --bg: #f5f7fb;
+        --bg-2: #edf4ff;
+        --panel: rgba(255, 255, 255, 0.94);
         --panel-strong: #ffffff;
-        --ink: #1d2433;
-        --ink-soft: #52607a;
-        --line: #e5eaf3;
-        --navy: #162b4d;
-        --navy-2: #1e3a62;
-        --microsoft-blue: #0f6cbd;
-        --microsoft-blue-soft: #eaf4ff;
+        --ink: #1b2430;
+        --ink-soft: #58677a;
+        --line: #e7edf5;
+        --navy: #172b4d;
+        --blue: #0f6cbd;
+        --blue-2: #0b4d8c;
         --gold: #c9a76a;
-        --gold-soft: #f7eedb;
+        --gold-soft: #f8f1df;
         --red: #f25022;
         --green: #7fba00;
-        --blue: #00a4ef;
-        --yellow: #ffb900;
-        --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+        --sky: #00a4ef;
+        --amber: #ffb900;
+        --shadow: 0 26px 60px rgba(15, 23, 42, 0.08);
       }
 
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
 
-      html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
 
       body {
         margin: 0;
         min-height: 100vh;
         font-family: "Segoe UI", Arial, sans-serif;
-        background: radial-gradient(circle at top left, rgba(15, 108, 189, 0.10), transparent 24%),
-                    linear-gradient(180deg, #f7f9fd 0%, #eef3ff 100%);
+        background:
+          radial-gradient(circle at top left, rgba(15, 108, 189, 0.10), transparent 22%),
+          linear-gradient(180deg, #fafcff 0%, var(--bg) 100%);
         color: var(--ink);
       }
 
       .page {
-        max-width: 1220px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 56px 18px 80px;
+        padding: 42px 18px 70px;
       }
 
-      .header {
+      .topbar {
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 14px;
+        gap: 12px;
         margin-bottom: 18px;
       }
 
-      .logo {
+      .microsoft-mark {
         display: grid;
         grid-template-columns: repeat(2, 10px);
         gap: 4px;
-        padding: 4px;
-        background: rgba(255,255,255,0.7);
-        border: 1px solid var(--line);
+        padding: 5px;
         border-radius: 10px;
-        box-shadow: 0 12px 24px rgba(16, 24, 40, 0.05);
+        background: rgba(255,255,255,0.8);
+        border: 1px solid var(--line);
+        box-shadow: 0 10px 24px rgba(17, 24, 39, 0.04);
       }
 
-      .logo .sq {
+      .microsoft-mark span {
+        display: block;
         width: 10px;
         height: 10px;
         border-radius: 2px;
       }
 
-      .logo .red { background: var(--red); }
-      .logo .green { background: var(--green); }
-      .logo .blue { background: var(--blue); }
-      .logo .yellow { background: var(--yellow); }
+      .red { background: var(--red); }
+      .green { background: var(--green); }
+      .blue { background: var(--sky); }
+      .yellow { background: var(--amber); }
 
       .eyebrow {
         margin: 0;
         font-size: 12px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: var(--microsoft-blue);
+        color: var(--blue);
         font-weight: 700;
       }
 
       .hero {
         text-align: center;
-        margin-bottom: 36px;
+        margin-bottom: 30px;
       }
 
       .hero h1 {
         margin: 0;
-        font-size: clamp(36px, 4vw, 60px);
-        line-height: 1.08;
+        font-size: clamp(32px, 4vw, 58px);
         letter-spacing: -0.06em;
         color: var(--navy);
       }
 
-      .hero .subtitle {
-        max-width: 900px;
+      .hero p {
+        max-width: 850px;
         margin: 16px auto 0;
         color: var(--ink-soft);
         font-size: 17px;
         line-height: 1.7;
       }
 
-      .calendar-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(290px, 1fr));
-        gap: 24px;
-      }
-
-      .month-card {
+      .calendar-shell {
         background: var(--panel);
         border: 1px solid var(--line);
-        border-radius: 28px;
-        padding: 24px 18px 18px;
+        border-radius: 30px;
+        padding: 20px 18px 18px;
         box-shadow: var(--shadow);
-        backdrop-filter: blur(3px);
       }
 
-      .month-header {
+      .month-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .nav-btn {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: white;
+        box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
+        color: var(--navy);
+        font-size: 30px;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+      }
+
+      .month-pill {
+        min-width: 340px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        margin-bottom: 14px;
-      }
-
-      .month-name {
-        font-size: clamp(24px, 2vw, 30px);
-        font-weight: 800;
-        color: var(--navy);
-        letter-spacing: -0.04em;
-      }
-
-      .year-tag {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--microsoft-blue);
-        background: var(--microsoft-blue-soft);
-        padding: 8px 12px;
+        justify-content: center;
+        gap: 14px;
+        padding: 14px 20px;
         border-radius: 999px;
+        border: 1px solid var(--line);
+        background: white;
+        box-shadow: 0 8px 18px rgba(17, 24, 39, 0.04);
       }
 
-      .weekdays,
-      .days {
+      .month-pill .year {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink-soft);
+      }
+
+      .month-pill .month {
+        font-size: clamp(28px, 2.5vw, 38px);
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        color: var(--navy);
+      }
+
+      .calendar {
         display: grid;
         grid-template-columns: repeat(7, minmax(0, 1fr));
-        gap: 8px;
-      }
-
-      .weekdays {
-        margin-bottom: 10px;
+        gap: 10px;
       }
 
       .weekday {
@@ -161,19 +181,19 @@
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--ink-soft);
-        padding: 4px 0 8px;
+        padding: 6px 0 10px;
       }
 
       .day {
-        height: 46px;
+        height: 56px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 12px;
-        font-size: 15px;
+        border-radius: 14px;
+        border: 1px solid transparent;
+        font-size: 16px;
         color: var(--ink);
         background: transparent;
-        border: 1px solid transparent;
       }
 
       .day.empty {
@@ -181,18 +201,18 @@
       }
 
       .day.release {
-        background: linear-gradient(180deg, var(--gold-soft) 0%, #fffaf2 100%);
+        background: linear-gradient(180deg, var(--gold-soft) 0%, #fffdf8 100%);
         border-color: rgba(201, 167, 106, 0.52);
-        color: #735309;
         font-weight: 800;
+        color: #754d07;
       }
 
       .day.release a {
         display: flex;
-        width: 100%;
-        height: 100%;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        height: 100%;
         color: inherit;
         text-decoration: none;
       }
@@ -200,80 +220,107 @@
       .day.future {
         background: #f8fafc;
         border-color: var(--line);
-        color: #9aa7bb;
+        color: #99a7b9;
       }
 
-      .issue-link {
+      .issue-panel {
+        margin-top: 24px;
+        border-top: 1px solid var(--line);
+        padding-top: 20px;
+      }
+
+      .issue-panel .badge {
+        display: inline-block;
+        margin-bottom: 12px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: var(--blue-2);
+        color: white;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .issue-panel h2 {
+        margin: 0 0 8px;
+        font-size: clamp(28px, 3vw, 42px);
+        letter-spacing: -0.05em;
+        color: var(--navy);
+      }
+
+      .issue-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .issue-meta .chip {
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .issue-panel a {
         display: inline-flex;
-        justify-content: center;
         align-items: center;
-        width: 100%;
-        margin-top: 18px;
-        padding: 14px 18px;
-        border-radius: 14px;
-        background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
-        color: #fff;
+        justify-content: center;
+        padding: 14px 20px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, var(--blue) 0%, var(--blue-2) 100%);
+        color: white;
         text-decoration: none;
         font-weight: 700;
-        box-shadow: 0 14px 30px rgba(22, 43, 77, 0.18);
+        box-shadow: 0 15px 30px rgba(15, 108, 189, 0.18);
       }
 
-      .issue-link.disabled {
-        background: linear-gradient(180deg, #dde6f0 0%, #edf2f7 100%);
-        color: #73839d;
+      .issue-panel a[disabled], .issue-panel a.disabled {
+        background: linear-gradient(180deg, #dfe8f0 0%, #eef3f8 100%);
+        color: #76879d;
         box-shadow: none;
         pointer-events: none;
       }
 
-      .history {
-        margin-top: 28px;
-        background: rgba(255,255,255,0.8);
-        border: 1px solid var(--line);
-        border-radius: 28px;
-        padding: 24px 20px 20px;
-        box-shadow: var(--shadow);
-      }
-
-      .history h2 {
-        margin: 0 0 16px;
-        font-size: 24px;
-        color: var(--navy);
-      }
-
-      .history-list {
+      .archive {
+        margin-top: 22px;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 12px;
       }
 
-      .history-item {
+      .archive-card {
+        background: rgba(255,255,255,0.82);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        padding: 14px 16px;
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        background: var(--panel-strong);
+        gap: 8px;
       }
 
-      .history-item span {
-        color: var(--ink);
-        font-weight: 600;
+      .archive-card span {
+        font-weight: 700;
+        color: var(--navy);
       }
 
-      .history-item a {
-        color: var(--microsoft-blue);
+      .archive-card a {
+        color: var(--blue);
         text-decoration: none;
         font-weight: 700;
       }
 
       .reference {
-        margin-top: 22px;
-        border-radius: 18px;
+        margin-top: 20px;
         padding: 16px 18px;
+        border-radius: 18px;
         background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,247,250,0.9));
-        border: 1px solid rgba(201, 167, 106, 0.45);
+        border: 1px solid rgba(201, 167, 106, 0.46);
       }
 
       .reference strong {
@@ -281,54 +328,80 @@
       }
 
       .reference a {
-        color: var(--microsoft-blue);
+        color: var(--blue);
         text-decoration: none;
         font-weight: 700;
       }
 
       @media (max-width: 760px) {
-        .calendar-grid {
-          grid-template-columns: 1fr;
+        .month-pill {
+          min-width: 220px;
+        }
+
+        .calendar {
+          gap: 7px;
+        }
+
+        .day {
+          height: 46px;
         }
       }
     </style>
   </head>
   <body>
     <div class="page">
-      <div class="header">
-        <div class="logo" aria-label="Microsoft logo">
-          <span class="sq red"></span>
-          <span class="sq green"></span>
-          <span class="sq blue"></span>
-          <span class="sq yellow"></span>
+      <div class="topbar">
+        <div class="microsoft-mark" aria-label="Microsoft logo">
+          <span class="red"></span>
+          <span class="green"></span>
+          <span class="blue"></span>
+          <span class="yellow"></span>
         </div>
         <p class="eyebrow">Microsoft 전략본부</p>
       </div>
 
       <header class="hero">
         <h1>뉴스레터</h1>
-        <p class="subtitle">
-          Microsoft 전략본부의 월간 인사이트와 주요 발표를 한 번에 확인할 수 있는 공개 캘린더입니다.<br />
-          고객은 공개 URL을 통해 최신 뉴스레터와 과거 아카이브를 모두 확인할 수 있습니다.
+        <p>
+          전략과 인사이트를 정기적으로 전달하는 월간 브리프를 한 달 단위로 보며,
+          이전/다음 월로 빠르게 이동해 최신 발행 내용과 과거 이슈를 함께 확인할 수 있습니다.
         </p>
       </header>
 
       <main>
-        <div class="calendar-grid" id="calendarGrid"></div>
-
-        <section class="history" aria-label="Historical newsletters">
-          <h2>Historical issues</h2>
-          <div class="history-list">
-            <div class="history-item">
-              <span>September 2026</span>
-              <a href="./SMEC_KR_CxO_Letter_Sep2026_FINAL.html" target="_blank" rel="noopener noreferrer">Open</a>
+        <div class="calendar-shell">
+          <div class="month-nav">
+            <button class="nav-btn" id="prevBtn" aria-label="이전 달">&#8249;</button>
+            <div class="month-pill">
+              <span class="year" id="yearLabel">2026</span>
+              <span class="month" id="monthLabel">September</span>
             </div>
-            <div class="history-item">
-              <span>October 2026</span>
-              <a href="./SMEC_KR_CxO_Letter_Oct2026_FINAL.html" target="_blank" rel="noopener noreferrer">Open</a>
-            </div>
+            <button class="nav-btn" id="nextBtn" aria-label="다음 달">&#8250;</button>
           </div>
-        </section>
+
+          <div class="calendar" id="calendar"></div>
+
+          <div class="issue-panel" id="issuePanel"></div>
+        </div>
+
+        <div class="archive" aria-label="newsletter archive">
+          <div class="archive-card">
+            <span>September</span>
+            <a href="./SMEC_KR_CxO_Letter_Sep2026_FINAL.html" target="_blank" rel="noopener noreferrer">Open</a>
+          </div>
+          <div class="archive-card">
+            <span>October</span>
+            <a href="./SMEC_KR_CxO_Letter_Oct2026_FINAL.html" target="_blank" rel="noopener noreferrer">Open</a>
+          </div>
+          <div class="archive-card">
+            <span>November</span>
+            <a href="#" onclick="return false;">Scheduled</a>
+          </div>
+          <div class="archive-card">
+            <span>December</span>
+            <a href="#" onclick="return false;">Scheduled</a>
+          </div>
+        </div>
 
         <div class="reference">
           <strong>Reference calendar:</strong>
@@ -338,133 +411,152 @@
     </div>
 
     <script>
-      const monthConfig = [
-        {
-          year: 2026,
-          monthIndex: 8,
-          monthName: 'September',
-          releaseDate: 21,
-          href: './SMEC_KR_CxO_Letter_Sep2026_FINAL.html',
-          label: 'September issue • 2026.09.21',
-          past: true
-        },
-        {
-          year: 2026,
-          monthIndex: 9,
-          monthName: 'October',
-          releaseDate: 15,
-          href: './SMEC_KR_CxO_Letter_Oct2026_FINAL.html',
-          label: 'October issue • 2026.10.15',
-          past: true
-        },
-        {
-          year: 2026,
-          monthIndex: 10,
-          monthName: 'November',
-          releaseDate: 12,
-          href: '#',
-          label: 'Scheduled • 2026.11.12',
-          past: false
-        },
-        {
-          year: 2026,
-          monthIndex: 11,
-          monthName: 'December',
-          releaseDate: 10,
-          href: '#',
-          label: 'Scheduled • 2026.12.10',
-          past: false
-        }
+      const monthNames = [
+        'January','February','March','April','May','June',
+        'July','August','September','October','November','December'
       ];
 
-      function renderMonthCard(config) {
-        const card = document.createElement('section');
-        card.className = 'month-card';
+      const issues = {
+        '2026-09': {
+          label: 'September issue',
+          date: '2026.09.21',
+          href: './SMEC_KR_CxO_Letter_Sep2026_FINAL.html',
+          future: false
+        },
+        '2026-10': {
+          label: 'October issue',
+          date: '2026.10.15',
+          href: './SMEC_KR_CxO_Letter_Oct2026_FINAL.html',
+          future: false
+        },
+        '2026-11': {
+          label: 'November issue',
+          date: '2026.11.12',
+          href: '#',
+          future: true
+        },
+        '2026-12': {
+          label: 'December issue',
+          date: '2026.12.10',
+          href: '#',
+          future: true
+        }
+      };
 
-        const header = document.createElement('div');
-        header.className = 'month-header';
+      let viewDate = new Date(2026, 8, 1);
 
-        const monthName = document.createElement('div');
-        monthName.className = 'month-name';
-        monthName.textContent = config.monthName;
+      function keyFromDate(date) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      }
 
-        const yearTag = document.createElement('span');
-        yearTag.className = 'year-tag';
-        yearTag.textContent = config.year;
+      function renderCalendar() {
+        const calendar = document.getElementById('calendar');
+        const monthLabel = document.getElementById('monthLabel');
+        const yearLabel = document.getElementById('yearLabel');
+        const y = viewDate.getFullYear();
+        const m = viewDate.getMonth();
 
-        header.appendChild(monthName);
-        header.appendChild(yearTag);
+        monthLabel.textContent = monthNames[m];
+        yearLabel.textContent = y;
+
+        calendar.innerHTML = '';
 
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const weekdayRow = document.createElement('div');
-        weekdayRow.className = 'weekdays';
         weekdays.forEach((day) => {
           const el = document.createElement('div');
           el.className = 'weekday';
           el.textContent = day;
-          weekdayRow.appendChild(el);
+          calendar.appendChild(el);
         });
 
-        const daysWrap = document.createElement('div');
-        daysWrap.className = 'days';
-
-        const firstDay = new Date(config.year, config.monthIndex, 1).getDay();
-        const totalDays = new Date(config.year, config.monthIndex + 1, 0).getDate();
+        const firstDay = new Date(y, m, 1).getDay();
+        const totalDays = new Date(y, m + 1, 0).getDate();
+        const releaseDate = issues[keyFromDate(viewDate)] ? getIssueDay(y, m) : null;
 
         for (let i = 0; i < firstDay; i += 1) {
-          const empty = document.createElement('div');
-          empty.className = 'day empty';
-          empty.textContent = ' ';
-          daysWrap.appendChild(empty);
+          const blank = document.createElement('div');
+          blank.className = 'day empty';
+          calendar.appendChild(blank);
         }
 
         for (let day = 1; day <= totalDays; day += 1) {
           const cell = document.createElement('div');
           cell.className = 'day';
 
-          if (day === config.releaseDate && config.past) {
-            cell.classList.add('release');
-            const link = document.createElement('a');
-            link.href = config.href;
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-            link.textContent = day;
-            cell.appendChild(link);
-          } else if (day === config.releaseDate && !config.past) {
-            cell.classList.add('future');
-            cell.textContent = day;
+          if (releaseDate && day === releaseDate) {
+            const info = issues[keyFromDate(viewDate)];
+            if (info && !info.future) {
+              cell.classList.add('release');
+              const link = document.createElement('a');
+              link.href = info.href;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              link.textContent = day;
+              cell.appendChild(link);
+            } else {
+              cell.classList.add('future');
+              cell.textContent = day;
+            }
           } else {
             cell.textContent = day;
           }
 
-          daysWrap.appendChild(cell);
+          calendar.appendChild(cell);
         }
 
-        const link = document.createElement('a');
-        link.className = 'issue-link' + (config.past ? '' : ' disabled');
-        link.href = config.past ? config.href : '#';
-        link.target = config.past ? '_blank' : '';
-        link.rel = config.past ? 'noopener noreferrer' : '';
-        link.textContent = config.label;
-
-        if (!config.past) {
-          link.addEventListener('click', (event) => {
-            event.preventDefault();
-          });
-        }
-
-        card.appendChild(header);
-        card.appendChild(weekdayRow);
-        card.appendChild(daysWrap);
-        card.appendChild(link);
-
-        return card;
+        renderIssuePanel();
       }
 
-      const grid = document.getElementById('calendarGrid');
-      monthConfig.forEach((config) => {
-        grid.appendChild(renderMonthCard(config));
+      function getIssueDay(year, monthIndex) {
+        const issueInfo = issues[`${year}-${String(monthIndex + 1).padStart(2, '0')}`];
+        if (!issueInfo) return null;
+
+        const dayMap = {
+          '2026-09': 21,
+          '2026-10': 15,
+          '2026-11': 12,
+          '2026-12': 10
+        };
+
+        return dayMap[`${year}-${String(monthIndex + 1).padStart(2, '0')}`] || null;
+      }
+
+      function renderIssuePanel() {
+        const key = keyFromDate(viewDate);
+        const info = issues[key];
+        const panel = document.getElementById('issuePanel');
+
+        if (!info) {
+          panel.innerHTML = '';
+          return;
+        }
+
+        const isFuture = info.future;
+        panel.innerHTML = `
+          <div class="badge">${isFuture ? 'Scheduled' : 'Published'}</div>
+          <h2>${info.label}</h2>
+          <div class="issue-meta">
+            <span class="chip">Release: ${info.date}</span>
+            <span class="chip">${monthNames[viewDate.getMonth()]}</span>
+            <span class="chip">${viewDate.getFullYear()}</span>
+          </div>
+          <a href="${isFuture ? '#' : info.href}" target="${isFuture ? '' : '_blank'}" rel="${isFuture ? '' : 'noopener noreferrer'}" class="${isFuture ? 'disabled' : ''}" ${isFuture ? 'onclick="return false;"' : ''}>
+            ${isFuture ? 'Coming soon' : 'Open newsletter'}
+          </a>
+        `;
+      }
+
+      document.getElementById('prevBtn').addEventListener('click', () => {
+        viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+        renderCalendar();
       });
+
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+        renderCalendar();
+      });
+
+      renderCalendar();
     </script>
   </body>
 </html>
