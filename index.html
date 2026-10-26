@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marketing Calendar</title>
+    <title>Event Wrap-Up Report Calendar</title>
     <style>
       :root {
         --bg: #f2efe9;
@@ -17,6 +17,7 @@
         --tag-red: #ee7e65;
         --tag-violet: #8b85e7;
         --tag-amber: #d4a15d;
+        --tag-newsletter: #7d5df2;
         --chip-bg: #eff5ff;
         --chip-text: #3a4c68;
         --shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
@@ -96,6 +97,63 @@
       .tag.cloud { background: linear-gradient(90deg, #4ab37c, #58c6ab); }
       .tag.security { background: linear-gradient(90deg, #7e8df0, #6ea4ff); }
       .tag.multi { background: linear-gradient(90deg, #e78a5d, #d76fb2); }
+      .tag.newsletter { background: linear-gradient(90deg, #8a63f5, #a458d1); }
+
+      .publication-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin: 0 0 18px;
+      }
+
+      .publication-card {
+        border: 1px solid var(--line-strong);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.18);
+        padding: 12px 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .publication-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #5f52a9;
+      }
+
+      .publication-label::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #8a63f5, #a458d1);
+        display: inline-block;
+      }
+
+      .publication-card h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+        line-height: 1.3;
+      }
+
+      .publication-card p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .publication-link {
+        display: inline-block;
+        color: #2a63d9;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
 
       .search-row {
         display: grid;
@@ -213,9 +271,11 @@
       .event.blue { --event-color: #4d92ff; }
       .event.purple { --event-color: #8d7af8; }
       .event.orange { --event-color: #eaa752; }
+      .event.newsletter { --event-color: #8a63f5; }
 
       @media (max-width: 900px) {
-        .search-row { grid-template-columns: 1fr; }
+        .search-row,
+        .publication-row { grid-template-columns: 1fr; }
         .cell { min-height: 130px; }
       }
 
@@ -230,17 +290,33 @@
   <body>
     <div class="page">
       <div class="month-bar">
-        <div class="month-select" aria-label="월 선택">
-          <span>2026년 2월</span>
+        <div class="month-select" aria-label="보고서 캘린더">
+          <span>Event Wrap-Up Report Calendar</span>
           <span class="caret">›</span>
         </div>
       </div>
 
       <div class="filter-row" aria-label="카테고리 필터">
+        <span class="tag newsletter">Newsletter</span>
         <span class="tag copilot">Copilot</span>
         <span class="tag cloud">Cloud &amp; AI</span>
         <span class="tag security">Security</span>
         <span class="tag multi">Multi-Solution</span>
+      </div>
+
+      <div class="publication-row" aria-label="발행 일정">
+        <div class="publication-card">
+          <div class="publication-label">Newsletter</div>
+          <h3>2026 Sep / 2nd Thursday</h3>
+          <p>Fixed publication date: 2026-09-10</p>
+          <a class="publication-link" href="wrapup-report-2026-09-10.html">Open wrap-up report</a>
+        </div>
+        <div class="publication-card">
+          <div class="publication-label">Newsletter</div>
+          <h3>2026 Oct / 2nd Thursday</h3>
+          <p>Fixed publication date: 2026-10-08</p>
+          <a class="publication-link" href="wrapup-report-2026-10-08.html">Open wrap-up report</a>
+        </div>
       </div>
 
       <div class="search-row">
@@ -256,66 +332,60 @@
     <script>
       const month = {
         year: 2026,
-        monthIndex: 1,
-        label: '2026년 2월'
+        monthIndex: 8,
+        label: '2026년 9월'
       };
 
       const events = {
-        '2026-02-01': [
+        '2026-09-10': [
+          {
+            title: 'Newsletter Wrap-up Report',
+            meta: 'Newsletter',
+            color: 'newsletter',
+            link: 'wrapup-report-2026-09-10.html'
+          }
+        ],
+        '2026-09-11': [
           { title: 'AI Agent 개발', meta: 'Digital(한국어)', color: 'orange' }
         ],
-        '2026-02-02': [
+        '2026-09-12': [
           { title: 'Azure OpenAI 도입 사례', meta: 'Cloud & AI', color: 'blue' }
         ],
-        '2026-02-03': [
+        '2026-09-13': [
           { title: 'Agentic DevOps 핵심', meta: 'GitHub Copilot', color: 'red' },
           { title: '빌드 자동화 워크플로', meta: 'Developer Experience', color: 'green' }
         ],
-        '2026-02-04': [
+        '2026-09-14': [
           { title: 'AI 논문/리서치 정리', meta: 'Digital(한국어)', color: 'purple' }
         ],
-        '2026-02-05': [
+        '2026-09-15': [
           { title: 'Microsoft AI 보안 브리핑', meta: 'Security', color: 'red' }
         ],
-        '2026-02-08': [
-          { title: 'Azure Stack 업그레이드', meta: 'Cloud & AI', color: 'blue' }
+        '2026-10-08': [
+          {
+            title: 'Newsletter Wrap-up Report',
+            meta: 'Newsletter',
+            color: 'newsletter',
+            link: 'wrapup-report-2026-10-08.html'
+          }
         ],
-        '2026-02-09': [
-          { title: '보안 전략 세미나', meta: 'Security', color: 'red' }
-        ],
-        '2026-02-10': [
-          { title: 'AI 보안 가이드라인', meta: 'Digital(한국어)', color: 'purple' }
-        ],
-        '2026-02-11': [
-          { title: '고객용 Copilot 마케팅', meta: 'Copilot', color: 'green' }
-        ],
-        '2026-02-12': [
-          { title: '실무 적용 사례 공유', meta: 'Digital(한국어)', color: 'orange' }
-        ],
-        '2026-02-13': [
-          { title: 'M365 Copilot 성장 전략', meta: 'Copilot', color: 'blue' }
-        ],
-        '2026-02-14': [
+        '2026-10-09': [
           { title: 'Cloud modernization', meta: 'Cloud & AI', color: 'green' }
         ],
-        '2026-02-16': [
-          { title: '정기 고객 리뷰', meta: 'Digital(한국어)', color: 'purple' }
+        '2026-10-10': [
+          { title: '보안 전략 세미나', meta: 'Security', color: 'red' }
         ],
-        '2026-02-18': [
-          { title: 'AI 활용 교육 프로그램', meta: 'Security', color: 'red' }
+        '2026-10-11': [
+          { title: 'M365 Copilot 성장 전략', meta: 'Copilot', color: 'blue' }
         ],
-        '2026-02-20': [
-          { title: '하이브리드 워크로드 계획', meta: 'Cloud & AI', color: 'blue' }
+        '2026-10-12': [
+          { title: '실무 적용 사례 공유', meta: 'Digital(한국어)', color: 'orange' }
         ],
-        '2026-02-24': [
-          { title: 'Microsoft 365 Copilot 출시', meta: 'Copilot', color: 'red' },
-          { title: '보안/운영 교육', meta: 'Digital(한국어)', color: 'purple' }
-        ],
-        '2026-02-26': [
+        '2026-10-13': [
           { title: 'Azure 및 보안 전략 회의', meta: 'Cloud & AI', color: 'green' }
         ],
-        '2026-02-27': [
-          { title: 'Microsoft Fabric 브리핑', meta: 'Security', color: 'orange' }
+        '2026-10-14': [
+          { title: 'AI 활용 교육 프로그램', meta: 'Security', color: 'red' }
         ]
       };
 
@@ -367,9 +437,9 @@
             meta.textContent = event.meta;
 
             const link = document.createElement('a');
-            link.href = '#';
+            link.href = event.link || '#';
             link.className = 'link';
-            link.textContent = '등록하기';
+            link.textContent = event.link ? 'wrap-up report' : '등록하기';
 
             eventBox.appendChild(title);
             eventBox.appendChild(meta);
