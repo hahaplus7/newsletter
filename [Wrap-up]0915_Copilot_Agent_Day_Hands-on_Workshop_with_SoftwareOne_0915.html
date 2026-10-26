@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>[Wrap-up] Copilot &amp; Agent Day Hands-on Workshop with SoftwareOne | 2026년 9월 15일</title>
+<style>
+:root {
+  --bg: #F4F4F4; --card: #FFFFFF; --fg: #000000; --body: #333333; --muted: #707070; --line: #E3E3E3;
+  --ink: #000000; --ink-fg: #FFFFFF; --ink-sub: #A1A7AE;
+  --blue: #3366FF; --cyan: #49D7FF; --violet: #6A2BD9; --tile: #F7F7F8;
+  --grad: linear-gradient(115deg, #49D7FF 0%, #3366FF 42%, #6A2BD9 78%, #B9A6FF 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0B0B0C; --card: #141416; --fg: #FFFFFF; --body: #D6D8DC; --muted: #A1A7AE; --line: #2A2C30; --tile: #1C1D21; --ink: #000000; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--body); font-family: Helvetica, Arial, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; line-height: 1.7; text-align: start; -webkit-font-smoothing: antialiased; word-break: keep-all; }
+.wrap { padding-block: 32px; padding-inline: 16px; }
+.card { max-width: 860px; margin-inline: auto; background: var(--card); overflow: hidden; border: 1px solid var(--line); }
+.topbar { display: flex; justify-content: space-between; align-items: center; background: var(--ink); color: var(--ink-fg); padding-block: 14px; padding-inline: 40px; }
+.logo { font-weight: 700; font-size: 20px; letter-spacing: -.3px; }
+.logo span { font-weight: 400; }
+.tag { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-sub); }
+.hero { background: var(--grad); color: #FFFFFF; padding-block: 52px 46px; padding-inline: 40px; position: relative; }
+.hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 85% 110%, rgba(0,0,0,.35), transparent 60%); pointer-events: none; }
+.hero > * { position: relative; z-index: 1; }
+.eyebrow { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; border: 1px solid rgba(255,255,255,.75); padding-block: 4px; padding-inline: 12px; }
+.hero h1 { margin-block: 18px 6px; font-size: 38px; line-height: 1.15; font-weight: 700; letter-spacing: -.6px; }
+.hero .lead { font-size: 19px; font-weight: 400; margin-block: 0 18px; opacity: .95; }
+.hero .meta { font-size: 14.5px; opacity: .9; }
+.content { padding-block: 36px 40px; padding-inline: 40px; }
+.content p { margin-block: 0 14px; font-size: 16px; }
+h2 { font-size: 24px; font-weight: 700; color: var(--fg); letter-spacing: -.4px; margin-block: 44px 16px; line-height: 1.3; }
+h2 small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-block-end: 4px; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); border-block-start: 3px solid var(--fg); }
+.kpi { padding-block: 18px; padding-inline: 14px; border-inline-end: 1px solid var(--line); border-block-end: 1px solid var(--line); }
+.kpi:last-child { border-inline-end: 0; }
+.kpi .n { font-size: 40px; font-weight: 700; color: var(--fg); line-height: 1; letter-spacing: -1px; }
+.kpi .n.g { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.kpi .l { font-size: 13px; color: var(--muted); margin-block-start: 8px; }
+ul.list { list-style: none; margin: 18px 0 0; padding: 0; }
+ul.list li { position: relative; padding-inline-start: 22px; margin-block-end: 10px; font-size: 16px; }
+ul.list li::before { content: ""; position: absolute; inset-inline-start: 0; inset-block-start: 10px; inline-size: 10px; block-size: 3px; background: var(--blue); }
+b { color: var(--fg); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.box { background: var(--tile); padding: 20px; border-block-start: 3px solid transparent; border-image: var(--grad) 1; }
+.box h3 { margin: 0 0 8px; font-size: 16.5px; color: var(--fg); }
+.box p { margin: 0; font-size: 14.5px; }
+table { inline-size: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: start; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); font-weight: 700; padding-block: 10px; padding-inline: 10px; border-block-end: 2px solid var(--fg); }
+td { padding-block: 11px; padding-inline: 10px; border-block-end: 1px solid var(--line); vertical-align: top; }
+td.t { white-space: nowrap; color: var(--muted); font-variant-numeric: tabular-nums; }
+td .s { color: var(--fg); font-weight: 700; display: block; }
+td .w { font-size: 13px; color: var(--muted); }
+.pill { display: inline-block; font-size: 11.5px; font-weight: 700; padding-block: 2px; padding-inline: 8px; border: 1px solid var(--fg); color: var(--fg); white-space: nowrap; }
+.pill.lab { background: var(--fg); color: var(--card); }
+tr.brk td { color: var(--muted); font-size: 13px; background: var(--tile); padding-block: 7px; }
+.steps { counter-reset: s; display: grid; gap: 12px; }
+.step { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: start; }
+.step::before { counter-increment: s; content: "0" counter(s); font-size: 28px; font-weight: 700; line-height: 1.1; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.step p { margin: 0; }
+.thanks .row { display: grid; grid-template-columns: 200px 1fr; gap: 12px; padding-block: 12px; border-block-end: 1px solid var(--line); }
+.thanks .k { font-weight: 700; color: var(--fg); font-size: 14.5px; }
+.thanks .v { font-size: 15px; }
+.cta { margin-block-start: 40px; background: var(--ink); color: var(--ink-fg); padding-block: 28px; padding-inline: 32px; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; }
+.cta .q { font-size: 20px; font-weight: 700; color: #FFFFFF; }
+.cta .p { font-size: 14px; color: var(--ink-sub); }
+.cta .partners { font-size: 15px; color: #FFFFFF; }
+.sign { color: var(--muted); font-size: 15px; margin-block-start: 22px; }
+.foot { max-width: 860px; margin-inline: auto; margin-block-start: 12px; text-align: center; font-size: 12px; color: var(--muted); }
+@media (max-width: 680px) {
+  .topbar, .hero, .content { padding-inline: 20px; }
+  .hero h1 { font-size: 28px; }
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: 1fr; }
+  .thanks .row { grid-template-columns: 1fr; gap: 2px; }
+  td.t { white-space: normal; }
+}
+@media print { body { background: #fff; } .wrap { padding: 0; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<article class="card">
+  <div class="topbar"><div class="logo">Software<span>One</span> <span style="color:var(--ink-sub)">×</span> Microsoft</div><div class="tag">Wrap-up Report</div></div>
+  <header class="hero">
+    <div class="eyebrow">2nd Copilot &amp; Agent Day · Korea</div>
+    <h1>Copilot &amp; Agent Day<br>Hands-on Workshop</h1>
+    <p class="lead">AI를 배우는 것에서, 직접 만들고 업무에 적용하는 것으로.</p>
+    <div class="meta">2026년 9월 15일(화) 09:00–15:00 · 한국마이크로소프트 13F 동해 &amp; 독도룸<br>SME&amp;C Korea × SoftwareOne × UCLIX</div>
+  </header>
+  <main class="content">
+    <p>안녕하세요, 여러분.</p>
+    <p>9월 15일, SME&amp;C Korea는 파트너사 <b>SoftwareOne</b>, <b>UCLIX</b>와 함께 <b>두 번째 Copilot &amp; Agent Day Hands-on Workshop</b>을 개최했습니다. 8월 첫 행사의 흐름을 이어, 이번에는 Microsoft 365 Copilot과 Agent를 <b>직접 만들고 경험하는 실습</b>에 더 깊이 집중했습니다. 행사 주요 내용을 공유드립니다.</p>
+
+    <h2><small>Results</small>행사 성과</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="n g">~60</div><div class="l">현장 참석 고객</div></div>
+      <div class="kpi"><div class="n">2nd</div><div class="l">Copilot &amp; Agent Day 시리즈</div></div>
+      <div class="kpi"><div class="n">5</div><div class="l">세미나 · 고객 사례 세션</div></div>
+      <div class="kpi"><div class="n">3</div><div class="l">Demo · Hands-on Lab</div></div>
+    </div>
+    <ul class="list">
+      <li><b>약 60명의 고객</b>이 현장에 참석해, 오전 세미나부터 오후 실습까지 함께했습니다.</li>
+      <li><b>8월 1회차에 이은 두 번째 행사</b>로, 이번 회차는 Microsoft 365 Copilot과 Agent 실습 비중을 높였습니다.</li>
+      <li>Microsoft · 고객사(한미약품) · 파트너(UCLIX, SoftwareOne)가 함께 <b>전략 → 사례 → 실습</b>으로 이어지는 하루 과정을 구성했습니다.</li>
+    </ul>
+
+    <h2><small>Highlights</small>주요 성과 및 잘된 점</h2>
+    <div class="grid">
+      <div class="box"><h3>직접 만드는 Agent</h3><p>고객이 실제 업무 시나리오로 Agent를 직접 만들고 써 보며, Microsoft 365 Copilot과 Agent를 손으로 익혔습니다.</p></div>
+      <div class="box"><h3>내 업무에 바로 적용</h3><p>참여형 세션으로 Copilot과 Agent를 매일의 업무에 어떻게 적용할지 구체적으로 이해할 수 있었습니다.</p></div>
+      <div class="box"><h3>높은 고객 참여</h3><p>워크숍 내내 고객의 몰입도가 높았고, 질문과 논의가 활발하게 이어졌습니다.</p></div>
+    </div>
+    <p style="margin-block-start:16px">고객이 AI를 <b>‘알아보는’ 단계에서 ‘직접 경험하고 업무에 적용하는’ 단계</b>로 나아가도록 돕는 또 하나의 의미 있는 발걸음이었습니다.</p>
+
+    <h2><small>Agenda</small>프로그램</h2>
+    <table>
+      <thead><tr><th>시간</th><th>구분</th><th>세션 · 발표자</th></tr></thead>
+      <tbody>
+        <tr><td class="t">09:30–09:45</td><td><span class="pill">Seminar</span></td><td><span class="s">Microsoft와 함께하는 Frontier Transformation 여정</span><span class="w">이상헌 매니저 (Microsoft)</span></td></tr>
+        <tr><td class="t">09:45–10:00</td><td><span class="pill">Seminar</span></td><td><span class="s">Frontier Firm을 위한 신뢰 기반 혁신: Microsoft의 Agent 보안과 거버넌스</span><span class="w">하석현 매니저 (Microsoft)</span></td></tr>
+        <tr><td class="t">10:00–10:20</td><td><span class="pill">Seminar</span></td><td><span class="s">AI 업무 혁신의 다음 단계, Copilot 최신 동향과 미래 전망</span><span class="w">최재형 매니저 (Microsoft)</span></td></tr>
+        <tr><td class="t">10:30–11:00</td><td><span class="pill">Customer Case</span></td><td><span class="s">AX Native Enterprise: 한미그룹의 Copilot에서 AI Agent로의 진화</span><span class="w">김범진 그룹장 (한미약품)</span></td></tr>
+        <tr><td class="t">11:00–11:30</td><td><span class="pill">Customer Case</span></td><td><span class="s">Copilot으로 가속화하는 부서별 업무 혁신과 생산성 향상 사례</span><span class="w">최성일 과장 (UCLIX)</span></td></tr>
+        <tr class="brk"><td class="t">11:30–12:40</td><td colspan="2">점심</td></tr>
+        <tr><td class="t">12:40–13:10</td><td><span class="pill lab">Demo</span></td><td><span class="s">AI Agent 구축부터 활용까지: Copilot Studio Demo &amp; Hands-on</span><span class="w">최성일 과장 (UCLIX)</span></td></tr>
+        <tr><td class="t">13:10–14:00</td><td><span class="pill lab">Lab #1</span></td><td><span class="s">실습으로 알아보는 Copilot Chat과 새로운 GitHub Copilot 활용법</span><span class="w">최재형 매니저 (Microsoft)</span></td></tr>
+        <tr><td class="t">14:00–14:50</td><td><span class="pill lab">Lab #2</span></td><td><span class="s">Copilot Studio로 구현하는 Proposal Agent와 Multi-Agent 협업</span><span class="w">김한빈 매니저 (SoftwareOne)</span></td></tr>
+        <tr class="brk"><td class="t">14:50–15:00</td><td colspan="2">Q&amp;A 및 상담 · 행사 종료</td></tr>
+      </tbody>
+    </table>
+
+    <h2><small>Next Steps</small>향후 계획</h2>
+    <div class="steps">
+      <div class="step"><p><b>참석 고객 후속 관리</b> — 실습과 상담에서 관심을 보인 고객을 정리해 영업 기회로 이어 가기</p></div>
+      <div class="step"><p><b>파트너 1:1 오퍼링 제안</b> — SoftwareOne · UCLIX가 어카운트 담당자와 함께 고객별 Copilot · Agent 도입을 제안</p></div>
+      <div class="step"><p><b>Copilot &amp; Agent Day 시리즈 확대</b> — 1·2회차 경험을 바탕으로 10월 3회차로 이어 가기</p></div>
+    </div>
+
+    <h2><small>Special Thanks</small>감사의 말씀</h2>
+    <div class="thanks">
+      <div class="row"><div class="k">Hands-on 세션 리드</div><div class="v">Philip Choi · Seukhyun Ha</div></div>
+      <div class="row"><div class="k">행사 운영 · 고객 케어</div><div class="v">Shelly Park · Sung Mi Kim</div></div>
+      <div class="row"><div class="k">DSS</div><div class="v">Daeik Kong · Jekyung Lee · Youngshil · Joonhee · Sang Hun Jin</div></div>
+      <div class="row"><div class="k">AE</div><div class="v">Jong Hoon Jung · Jongho Seo</div></div>
+      <div class="row"><div class="k">발표 · 사례 공유</div><div class="v">김범진 그룹장 (한미약품) · 최성일 과장 (UCLIX) · 김한빈 매니저 (SoftwareOne)</div></div>
+    </div>
+
+    <div class="cta">
+      <div><div class="q">함께해 주셔서 감사합니다.</div><div class="p">From learning about AI to experiencing and applying it.</div></div>
+      <div class="partners">SoftwareOne · UCLIX · Microsoft</div>
+    </div>
+    <p class="sign">— SME&amp;C Korea 팀 드림</p>
+  </main>
+</article>
+<div class="foot">Copilot &amp; Agent Day Hands-on Workshop with SoftwareOne · 2026년 9월 15일 · Microsoft Confidential. 내부용(Internal only).</div>
+</div>
+</body>
+</html>
