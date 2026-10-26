@@ -3,24 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SME&C Korea | CxO Newsletter Calendar</title>
+    <title>Microsoft 전략본부 뉴스레터 | Calendar</title>
     <style>
       :root {
-        --ink: #111827;
-        --ink-soft: #475467;
-        --line: #e5e7eb;
-        --panel: rgba(255, 255, 255, 0.9);
-        --bg-1: #f7f8fb;
-        --bg-2: #eef3ff;
-        --navy: #112a52;
-        --navy-2: #1e3a5f;
-        --blue: #1f4ea3;
-        --blue-soft: #edf4ff;
-        --gold: #c7a15b;
-        --gold-soft: #f9f0db;
-        --silver: #dfe5ee;
-        --shadow: 0 22px 50px rgba(17, 24, 39, 0.08);
-        --radius: 26px;
+        --bg-1: #f5f7fb;
+        --bg-2: #edf3ff;
+        --panel: rgba(255, 255, 255, 0.92);
+        --panel-strong: #ffffff;
+        --ink: #1d2433;
+        --ink-soft: #52607a;
+        --line: #e5eaf3;
+        --navy: #162b4d;
+        --navy-2: #1e3a62;
+        --microsoft-blue: #0f6cbd;
+        --microsoft-blue-soft: #eaf4ff;
+        --gold: #c9a76a;
+        --gold-soft: #f7eedb;
+        --red: #f25022;
+        --green: #7fba00;
+        --blue: #00a4ef;
+        --yellow: #ffb900;
+        --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
       }
 
       * { box-sizing: border-box; }
@@ -29,102 +32,115 @@
 
       body {
         margin: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background:
-          radial-gradient(circle at top left, rgba(31, 78, 163, 0.07), transparent 25%),
-          linear-gradient(180deg, var(--bg-2) 0%, var(--bg-1) 100%);
-        color: var(--ink);
         min-height: 100vh;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: radial-gradient(circle at top left, rgba(15, 108, 189, 0.10), transparent 24%),
+                    linear-gradient(180deg, #f7f9fd 0%, #eef3ff 100%);
+        color: var(--ink);
       }
 
       .page {
-        max-width: 1200px;
+        max-width: 1220px;
         margin: 0 auto;
-        padding: 56px 18px 72px;
+        padding: 56px 18px 80px;
       }
 
-      .topbar {
+      .header {
         display: flex;
-        justify-content: center;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 18px;
       }
 
-      .brand-mark {
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--gold), var(--blue));
-        box-shadow: 0 0 0 6px rgba(31, 78, 163, 0.08);
+      .logo {
+        display: grid;
+        grid-template-columns: repeat(2, 10px);
+        gap: 4px;
+        padding: 4px;
+        background: rgba(255,255,255,0.7);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: 0 12px 24px rgba(16, 24, 40, 0.05);
       }
+
+      .logo .sq {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+      }
+
+      .logo .red { background: var(--red); }
+      .logo .green { background: var(--green); }
+      .logo .blue { background: var(--blue); }
+      .logo .yellow { background: var(--yellow); }
 
       .eyebrow {
         margin: 0;
-        color: var(--blue);
         font-size: 12px;
         letter-spacing: 0.18em;
         text-transform: uppercase;
+        color: var(--microsoft-blue);
         font-weight: 700;
       }
 
       .hero {
         text-align: center;
-        margin-bottom: 34px;
+        margin-bottom: 36px;
       }
 
-      h1 {
+      .hero h1 {
         margin: 0;
-        font-size: clamp(32px, 4vw, 54px);
-        line-height: 1.1;
+        font-size: clamp(36px, 4vw, 60px);
+        line-height: 1.08;
         letter-spacing: -0.06em;
         color: var(--navy);
       }
 
-      .subtitle {
-        max-width: 820px;
+      .hero .subtitle {
+        max-width: 900px;
         margin: 16px auto 0;
+        color: var(--ink-soft);
         font-size: 17px;
         line-height: 1.7;
-        color: var(--ink-soft);
       }
 
       .calendar-grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(285px, 1fr));
+        grid-template-columns: repeat(2, minmax(290px, 1fr));
         gap: 24px;
-        margin-bottom: 26px;
       }
 
       .month-card {
         background: var(--panel);
         border: 1px solid var(--line);
-        border-radius: var(--radius);
+        border-radius: 28px;
+        padding: 24px 18px 18px;
         box-shadow: var(--shadow);
-        padding: 22px 18px 18px;
-        backdrop-filter: blur(4px);
+        backdrop-filter: blur(3px);
       }
 
       .month-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
       }
 
       .month-name {
         font-size: clamp(24px, 2vw, 30px);
         font-weight: 800;
         color: var(--navy);
+        letter-spacing: -0.04em;
       }
 
       .year-tag {
         font-size: 12px;
         font-weight: 700;
-        color: var(--blue);
-        background: var(--blue-soft);
-        border-radius: 999px;
+        color: var(--microsoft-blue);
+        background: var(--microsoft-blue-soft);
         padding: 8px 12px;
+        border-radius: 999px;
       }
 
       .weekdays,
@@ -154,10 +170,10 @@
         align-items: center;
         justify-content: center;
         border-radius: 12px;
-        border: 1px solid transparent;
         font-size: 15px;
         color: var(--ink);
         background: transparent;
+        border: 1px solid transparent;
       }
 
       .day.empty {
@@ -165,9 +181,9 @@
       }
 
       .day.release {
-        background: linear-gradient(180deg, var(--gold-soft) 0%, #fffaf0 100%);
-        border-color: rgba(199, 161, 91, 0.45);
-        color: #704f08;
+        background: linear-gradient(180deg, var(--gold-soft) 0%, #fffaf2 100%);
+        border-color: rgba(201, 167, 106, 0.52);
+        color: #735309;
         font-weight: 800;
       }
 
@@ -177,14 +193,14 @@
         height: 100%;
         align-items: center;
         justify-content: center;
-        text-decoration: none;
         color: inherit;
+        text-decoration: none;
       }
 
       .day.future {
         background: #f8fafc;
-        border-color: #ecf1f6;
-        color: #9aa5b1;
+        border-color: var(--line);
+        color: #9aa7bb;
       }
 
       .issue-link {
@@ -196,31 +212,26 @@
         padding: 14px 18px;
         border-radius: 14px;
         background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
-        color: white;
+        color: #fff;
         text-decoration: none;
         font-weight: 700;
-        letter-spacing: 0.01em;
-        box-shadow: 0 14px 28px rgba(17, 42, 82, 0.18);
-      }
-
-      .issue-link:hover {
-        filter: brightness(1.04);
+        box-shadow: 0 14px 30px rgba(22, 43, 77, 0.18);
       }
 
       .issue-link.disabled {
-        background: linear-gradient(180deg, #dfe5ee 0%, #e9eef5 100%);
-        color: #73829a;
+        background: linear-gradient(180deg, #dde6f0 0%, #edf2f7 100%);
+        color: #73839d;
         box-shadow: none;
         pointer-events: none;
       }
 
       .history {
-        margin-top: 24px;
-        background: rgba(255, 255, 255, 0.72);
+        margin-top: 28px;
+        background: rgba(255,255,255,0.8);
         border: 1px solid var(--line);
-        border-radius: var(--radius);
+        border-radius: 28px;
+        padding: 24px 20px 20px;
         box-shadow: var(--shadow);
-        padding: 24px 20px;
       }
 
       .history h2 {
@@ -243,31 +254,34 @@
         padding: 14px 16px;
         border: 1px solid var(--line);
         border-radius: 14px;
-        background: white;
+        background: var(--panel-strong);
+      }
+
+      .history-item span {
+        color: var(--ink);
+        font-weight: 600;
       }
 
       .history-item a {
+        color: var(--microsoft-blue);
         text-decoration: none;
-        color: var(--navy);
         font-weight: 700;
       }
 
       .reference {
-        margin-top: 20px;
-        padding: 18px 20px;
-        border-radius: 16px;
-        background: linear-gradient(180deg, rgba(255, 253, 250, 0.8), rgba(245, 247, 250, 0.8));
-        border: 1px solid rgba(199, 161, 91, 0.45);
+        margin-top: 22px;
+        border-radius: 18px;
+        padding: 16px 18px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,247,250,0.9));
+        border: 1px solid rgba(201, 167, 106, 0.45);
       }
 
       .reference strong {
-        display: inline-block;
-        margin-right: 8px;
         color: var(--navy);
       }
 
       .reference a {
-        color: var(--blue);
+        color: var(--microsoft-blue);
         text-decoration: none;
         font-weight: 700;
       }
@@ -281,16 +295,21 @@
   </head>
   <body>
     <div class="page">
-      <div class="topbar">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <p class="eyebrow">Microsoft SME&amp;C Korea</p>
+      <div class="header">
+        <div class="logo" aria-label="Microsoft logo">
+          <span class="sq red"></span>
+          <span class="sq green"></span>
+          <span class="sq blue"></span>
+          <span class="sq yellow"></span>
+        </div>
+        <p class="eyebrow">Microsoft 전략본부</p>
       </div>
 
       <header class="hero">
-        <h1>SME&amp;C Korea CxO Newsletter</h1>
+        <h1>뉴스레터</h1>
         <p class="subtitle">
-          월간 뉴스레터 발행 일정과 아카이브를 한 번에 확인할 수 있는 공개 캘린더입니다.<br />
-          고객이 공개 URL로 접속해 각 월의 최신 뉴스레터와 과거 발행 이력을 모두 확인할 수 있습니다.
+          Microsoft 전략본부의 월간 인사이트와 주요 발표를 한 번에 확인할 수 있는 공개 캘린더입니다.<br />
+          고객은 공개 URL을 통해 최신 뉴스레터와 과거 아카이브를 모두 확인할 수 있습니다.
         </p>
       </header>
 
@@ -298,7 +317,7 @@
         <div class="calendar-grid" id="calendarGrid"></div>
 
         <section class="history" aria-label="Historical newsletters">
-          <h2>Historical Newsletters</h2>
+          <h2>Historical issues</h2>
           <div class="history-list">
             <div class="history-item">
               <span>September 2026</span>
@@ -312,7 +331,7 @@
         </section>
 
         <div class="reference">
-          <strong>Marketing calendar reference:</strong>
+          <strong>Reference calendar:</strong>
           <a href="https://janeeyye.github.io/marketing-calendar-public/" target="_blank" rel="noopener noreferrer">Open Microsoft-style marketing calendar</a>
         </div>
       </main>
@@ -326,7 +345,8 @@
           monthName: 'September',
           releaseDate: 21,
           href: './SMEC_KR_CxO_Letter_Sep2026_FINAL.html',
-          description: 'September issue • 2026.09.21'
+          label: 'September issue • 2026.09.21',
+          past: true
         },
         {
           year: 2026,
@@ -334,7 +354,8 @@
           monthName: 'October',
           releaseDate: 15,
           href: './SMEC_KR_CxO_Letter_Oct2026_FINAL.html',
-          description: 'October issue • 2026.10.15'
+          label: 'October issue • 2026.10.15',
+          past: true
         },
         {
           year: 2026,
@@ -342,8 +363,8 @@
           monthName: 'November',
           releaseDate: 12,
           href: '#',
-          description: 'Scheduled • 2026.11.12',
-          future: true
+          label: 'Scheduled • 2026.11.12',
+          past: false
         },
         {
           year: 2026,
@@ -351,8 +372,8 @@
           monthName: 'December',
           releaseDate: 10,
           href: '#',
-          description: 'Scheduled • 2026.12.10',
-          future: true
+          label: 'Scheduled • 2026.12.10',
+          past: false
         }
       ];
 
@@ -401,7 +422,7 @@
           const cell = document.createElement('div');
           cell.className = 'day';
 
-          if (!config.future && day === config.releaseDate) {
+          if (day === config.releaseDate && config.past) {
             cell.classList.add('release');
             const link = document.createElement('a');
             link.href = config.href;
@@ -409,7 +430,7 @@
             link.rel = 'noopener noreferrer';
             link.textContent = day;
             cell.appendChild(link);
-          } else if (config.future && day === config.releaseDate) {
+          } else if (day === config.releaseDate && !config.past) {
             cell.classList.add('future');
             cell.textContent = day;
           } else {
@@ -420,13 +441,13 @@
         }
 
         const link = document.createElement('a');
-        link.className = 'issue-link' + (config.future ? ' disabled' : '');
-        link.href = config.future ? '#' : config.href;
-        link.target = config.future ? '' : '_blank';
-        link.rel = config.future ? '' : 'noopener noreferrer';
-        link.textContent = config.description;
+        link.className = 'issue-link' + (config.past ? '' : ' disabled');
+        link.href = config.past ? config.href : '#';
+        link.target = config.past ? '_blank' : '';
+        link.rel = config.past ? 'noopener noreferrer' : '';
+        link.textContent = config.label;
 
-        if (config.future) {
+        if (!config.past) {
           link.addEventListener('click', (event) => {
             event.preventDefault();
           });
