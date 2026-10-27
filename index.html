@@ -107,6 +107,19 @@
         font-weight: 800;
         color: white;
         box-shadow: var(--shadow);
+        border: none;
+        cursor: pointer;
+        transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+      }
+
+      .filter-pill:hover {
+        transform: translateY(-1px);
+      }
+
+      .filter-pill.active {
+        filter: brightness(1.08);
+        box-shadow: 0 6px 18px rgba(17, 24, 39, 0.12);
+        outline: 2px solid rgba(255,255,255,0.7);
       }
 
       .filter-pill.newsletter { background: linear-gradient(90deg, #7b5fe6, #8d69fb); }
@@ -214,12 +227,26 @@
       }
 
       .event-card {
+        position: relative;
         background: rgba(255,255,255,0.78);
         border-left: 4px solid var(--event-color, var(--purple));
         border-radius: 10px;
         padding: 9px 12px 10px 14px;
         box-shadow: 0 3px 12px rgba(17, 24, 39, 0.04);
         width: min(100%, 165px);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+        margin-bottom: 8px;
+      }
+
+      .event-card.is-dimmed {
+        opacity: 0.38;
+        filter: grayscale(0.12);
+      }
+
+      .event-card.is-highlighted {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(17, 24, 39, 0.12);
+        filter: saturate(1.15);
       }
 
       .event-card .title {
@@ -287,11 +314,11 @@
       </div>
 
       <div class="filter-row" aria-label="카테고리">
-        <span class="filter-pill newsletter">Newsletter</span>
-        <span class="filter-pill workshop">Workshop</span>
-        <span class="filter-pill executive">Executive</span>
-        <span class="filter-pill partner">Partner</span>
-        <span class="filter-pill summit">Summit</span>
+        <button class="filter-pill newsletter" type="button" data-category="newsletter" aria-pressed="false">Newsletter</button>
+        <button class="filter-pill workshop" type="button" data-category="workshop" aria-pressed="false">Workshop</button>
+        <button class="filter-pill executive" type="button" data-category="executive" aria-pressed="false">Executive</button>
+        <button class="filter-pill partner" type="button" data-category="partner" aria-pressed="false">Partner</button>
+        <button class="filter-pill summit" type="button" data-category="summit" aria-pressed="false">Summit</button>
       </div>
 
       <div class="kpi-row">
@@ -315,13 +342,27 @@
     <script>
       const monthState = { year: 2026, monthIndex: 8 };
       const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      let activeCategory = null;
+
+      function inferCategory(title) {
+        const text = title.toLowerCase();
+
+        if (text.includes('newsletter')) return 'newsletter';
+        if (text.includes('industry summit') || text.includes('summit') || text.includes('leadership connection')) return 'summit';
+        if (text.includes('cxo') || text.includes('executive') || text.includes('leadership') || text.includes('briefing')) return 'executive';
+        if (text.includes('partner') || text.includes('with ') || text.includes('with_')) return 'partner';
+        if (text.includes('workshop') || text.includes('hands-on') || text.includes('day')) return 'workshop';
+        if (text.includes('hackathon')) return 'workshop';
+
+        return 'workshop';
+      }
 
       const eventsByDate = {
         '2026-06-19': [
           {
             title: 'GitHub Copilot + MAF 해커톤',
             type: 'Workshop',
-            category: 'workshop',
+            category: inferCategory('GitHub Copilot + MAF 해커톤'),
             link: 'https://hahaplus7.github.io/newsletter/IDMA_Hackathon_Wrap-up_Report(KR).html'
           }
         ],
@@ -329,7 +370,7 @@
           {
             title: 'Newsletter for 9월',
             type: 'Newsletter',
-            category: 'newsletter',
+            category: inferCategory('Newsletter for 9월'),
             link: 'https://hahaplus7.github.io/newsletter/SMEC_KR_CxO_Letter_Sep2026_FINAL.html'
           }
         ],
@@ -337,7 +378,7 @@
           {
             title: 'Copilot & Agent Day Hands-on Workshop with 소프트웨어원',
             type: 'Workshop',
-            category: 'workshop',
+            category: inferCategory('Copilot & Agent Day Hands-on Workshop with 소프트웨어원'),
             link: 'https://hahaplus7.github.io/newsletter/[Wrap-up]0915_Copilot_Agent_Day_Hands-on_Workshop_with_SoftwareOne_0915.html'
           }
         ],
@@ -345,15 +386,15 @@
           {
             title: 'Industry Summit Leadership Connection',
             type: 'Summit',
-            category: 'summit',
-            link: '[Wrap-up_KR] SME&C Leadership Connection at Microsoft Industry Summit (9_30, COEX)_FINAL.html'
+            category: inferCategory('Industry Summit Leadership Connection'),
+            link: 'https://hahaplus7.github.io/newsletter/[Wrap-up_KR] SME&C Leadership Connection at Microsoft Industry Summit (9_30, COEX)_FINAL.html'
           }
         ],
         '2026-10-08': [
           {
             title: 'Newsletter 10월',
             type: 'Newsletter',
-            category: 'newsletter',
+            category: inferCategory('Newsletter 10월'),
             link: 'https://hahaplus7.github.io/newsletter/SMEC_KR_CxO_Letter_Oct2026_FINAL.html'
           }
         ],
@@ -361,8 +402,8 @@
           {
             title: 'Copilot & Agent Day with 씨앤토트',
             type: 'Workshop',
-            category: 'workshop',
-            link: '[Wrap-up]10월21일_Copilot_Agent_Day_with_씨앤토트_KR.html'
+            category: inferCategory('Copilot & Agent Day with 씨앤토트'),
+            link: 'https://hahaplus7.github.io/newsletter/[Wrap-up]10월21일_Copilot_Agent_Day_with_씨앤토트_KR.html'
           }
         ]
       };
@@ -376,6 +417,14 @@
         monthLabel.textContent = `${monthState.year}년 ${monthState.monthIndex + 1}월`;
       }
 
+      function updateFilterButtons() {
+        document.querySelectorAll('.filter-pill').forEach((button) => {
+          const isActive = button.dataset.category === activeCategory;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', String(isActive));
+        });
+      }
+
       function updateKpis() {
         const year = monthState.year;
         const monthIndex = monthState.monthIndex;
@@ -386,6 +435,7 @@
         for (let day = 1; day <= totalDays; day++) {
           const key = getDateKey(year, monthIndex, day);
           (eventsByDate[key] || []).forEach((event) => {
+            if (activeCategory && event.category !== activeCategory) return;
             total += 1;
             if (event.category === 'executive') executive += 1;
           });
@@ -429,7 +479,10 @@
 
           (eventsByDate[key] || []).forEach((event) => {
             const card = document.createElement('div');
+            const isMatching = !activeCategory || event.category === activeCategory;
             card.className = `event-card ${event.category}`;
+            card.classList.toggle('is-dimmed', !!activeCategory && !isMatching);
+            card.classList.toggle('is-highlighted', isMatching && !!activeCategory);
 
             const title = document.createElement('span');
             title.className = 'title';
@@ -456,6 +509,13 @@
         }
       }
 
+      function toggleCategory(category) {
+        activeCategory = activeCategory === category ? null : category;
+        updateFilterButtons();
+        updateKpis();
+        renderCalendar();
+      }
+
       function moveMonth(offset) {
         const next = new Date(monthState.year, monthState.monthIndex + offset, 1);
         monthState.year = next.getFullYear();
@@ -465,10 +525,15 @@
         renderCalendar();
       }
 
+      document.querySelectorAll('.filter-pill').forEach((button) => {
+        button.addEventListener('click', () => toggleCategory(button.dataset.category));
+      });
+
       document.getElementById('prevMonth').addEventListener('click', () => moveMonth(-1));
       document.getElementById('nextMonth').addEventListener('click', () => moveMonth(1));
 
       updateMonthLabel();
+      updateFilterButtons();
       updateKpis();
       renderCalendar();
     </script>
